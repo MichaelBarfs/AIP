@@ -20,12 +20,15 @@ public class Wochenplan {
     }
 
     private boolean correctJson(){
-        return id > 0 && content != null && !content.isEmpty();
+        return content != null && !content.isEmpty();
     }
 
-    public static Wochenplan fromJson(String json)
+    public static Wochenplan fromJson(String json) throws  IllegalArgumentException
     {
         Wochenplan plan = gson.fromJson(json, Wochenplan.class);
+        if(plan == null){
+            throw new IllegalArgumentException("Body is empty");
+        }
         if(!plan.correctJson())
         {
             throw new IllegalArgumentException("Not all required variables are defined in the json!");
@@ -34,6 +37,7 @@ public class Wochenplan {
     }
 
     public long getId() {return id;}
+    public void setID(long id) {this.id = id;}
     public String getContent() { return content;}
     public String toJson() {return gson.toJson(this);}
 }
