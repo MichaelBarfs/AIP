@@ -58,7 +58,7 @@ public class Startup {
                 Wochenplan plan = Wochenplan.fromJson(req.body());
                 long id = nextID();
                 plan.setID(id);
-                wochenplaene.put(id, plan);
+                wochenplaene.put (id, plan);
                 res.status(200);
                 return gson.toJson("OK, Plan erstellt");
             }
@@ -78,6 +78,7 @@ public class Startup {
                     res.status(404);
                     return gson.toJson("ID nicht gefunden");
                 }else{
+                    plan.setID(id);
                     wochenplaene.put(id, plan);
                     res.status(200);
                     return gson.toJson("OK");
